@@ -28,6 +28,7 @@ celestia-appd keys add $CELESTIA_WALLET
 Ù‚Ø¨Ù„ Ø§Ø² Ù‡Ø± Ú©Ø§Ø±ÛŒ Ø¨Ù‡ Ù¾Ø§Ø¨Ù„ÛŒÚ© Ø§Ø¯Ø±Ø³ØªÙˆÙ† Ù…Ù‚Ø¯Ø§Ø±ÛŒ bnb ØªØ³ØªÛŒ Ø§Ø² ÛŒÚ© Ú©ÛŒÙ Ù¾ÙˆÙ„ Ù…ØªØ§Ù…Ø³Ú© Ø§Ø±Ø³Ø§Ù„ Ú©Ù†ÛŒØ¯ Ùˆ Ø¨Ø¹Ø¯ Ø§Ø¯Ø§Ù…Ù‡ Ù…Ø³ÛŒØ± Ø±Ùˆ Ø¨Ø±ÛŒØ¯
 
 cd $ho Ù‚Ø¨Ù„ Ø§Ø² Ù‡Ø± Ú©Ø§Ø±ÛŒ Ø¨Ù‡ Ù¾Ø§Ø¨Ù„ÛŒÚ© Ø§Ø¯Ø±Ø³ØªÙˆÙ Ù‚Ø¨Ù„ Ø§Ø² Ù‡Ø± Ú©Ø§Ø±ÛŒ Ø¨Ù‡ Ù¾Ø§Ø¨Ù„ÛŒÚ© Ø§Ø¯Ø±Ø³ØªÙˆÙ
+Â  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
 
 cd /root
 mkdir nulink
