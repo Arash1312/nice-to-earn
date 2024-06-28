@@ -3,12 +3,10 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o 
 
 celestia-appd keys add $CELESTIA_WALLET
 celestia-appd keys add $CELESTIA_WALLET
-Â  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
 celestia-appd keys add $CELESTIA_WALLET
 Â  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
 
 ------------------------------------------------
-
 celestia-appd keys add $CELESTIA_WALLET
 celestia-appd keys add $CELESTIA_WALLET
 wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.10.23-d901d8
