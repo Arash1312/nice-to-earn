@@ -13,6 +13,10 @@ wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.10.23-d90
 celestia-appd keys add $CELESTIA_WALLET
 celestia-appd keys add $CELESTIA_WALLET
 
+Â  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+celestia-appd keys add $CELESTIA_WALLET
+celestia-appd keys add $CELESTIA_WALLET
+Â  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
 
 
 Ø­ÙˆØ§Ø³ØªÙˆÙ† Ø¨Ø§Ø´Ù‡ ØªÙˆÛŒ Ú©Ø¯ Ø¨Ø§Ù„Ø§ Ø§ÙˆÙ† Ù†Ù‚Ø·Ù‡ Ø§ÙˆÙ„ Ú©Ø¯ Ø±Ùˆ Ù‡Ù… Ø¨Ø§ÛŒØ¯  Ú©Ù¾ÛŒ Ú©Ù†ÛŒØ¯
