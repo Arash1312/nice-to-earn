@@ -19,27 +19,14 @@ celestia-appd keys add $CELESTIA_WALLET
 chmod -R 777 /root/nulink
 
 pip install virtualenv
-
-virtualenv /root/nulink-venv
-
-source /root/nulink-venv/bin/activate
-
 wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
-
 pip install nulink-0.2.0-py3-none-any.whl
-
 pip install --upgrade pip
-
 source /root/nulink-venv/bin/activate
-
 python -c "import nulink"
-
 nulink --help
-
 export NULINK_KEYSTORE_PASSWORD=xxxxxxxxxxxx
-
 Ø¨Ù‡ Ø¬Ø§ÛŒ Ø§ÛŒÚ©Ø³ Ù‡Ø§ Ø§ÙˆÙ† Ù¾Ø³ÙˆØ±Ø¯ Ú©Ù‡ Ø¨Ø§Ù„Ø§ØªØ± ÙˆØ§Ø±Ø¯ Ú©Ø±Ø¯ÛŒØ¯ Ùˆ Ú¯ÙØªÙ… Ø¯Ø± Ø§Ø¯Ø§Ù…Ù‡ Ù„Ø§Ø²Ù…ÙˆÙ† Ù…ÛŒØ´Ù‡ Ø±Ùˆ ÙˆØ§Ø±Ø¯ Ú©Ù†ÛŒØ¯
-
 export NULINK_OPERATOR_ETH_PASSWORD=xxxxxxxxxx
 
 Ø¯Ø± Ø§ÛŒÙ†Ø¬Ø§ Ù‡Ù… Ø¨Ù‡ Ø¬Ø§ÛŒ Ø§ÛŒÚ©Ø³ Ù‡Ø§ Ø§ÙˆÙ† Ù¾Ø³ÙˆØ±Ø¯ÛŒ Ú©Ù‡ Ø¨Ø§Ù„Ø§ØªØ± Ø¯Ø§Ø¯ÛŒØ¯ Ø±Ùˆ Ø¯ÙˆØ¨Ø§Ø±Ù‡ ÙˆØ§Ø±Ø¯ Ú©Ù†ÛŒØ¯
@@ -57,9 +44,6 @@ nulink/nulink nulink ursula init \
 --payment-network bsc_testnet \
 --operator-address yyyyyyyyyyyyyyy \
 --max-gas-price 100
-Ø­ÙˆØ§Ø³ØªÙˆÙ† Ø¨Ø§Ø´Ù‡ ØªÙˆÛŒ Ú©Ø¯ Ø¨Ø§Ù„Ø§ Ø§ÙˆÙ† Ù†Ù‚Ø·Ù‡ Ø§ÙˆÙ„ Ú©Ø¯ Ø±Ùˆ Ù‡Ù… Ø¨Ø§ÛŒØ¯  Ú©Ù¾ÛŒ Ú©Ù†ÛŒØ¯
-Ø¨Ø¹Ø¯ Ø§Ø² ÙˆØ§Ø±Ø¯ Ú©Ø±Ø¯Ù† Ù¾Ø³ÙˆØ±Ø¯ ÛŒÚ© Ø³Ø±ÛŒ Ø§Ø·Ù„Ø§Ø¹Ø§Øª Ù…ÛŒØ¯Ù‡ Ø¨Ù‡ØªÙˆÙ† Ú©Ù‡ Ø¨Ø§ÛŒØ¯ Ø§ÙˆÙ† Ù‡Ø§ÛŒ ØªÙˆÛŒ ÛŒÙ‡ notepad Ø°Ø®ÛŒØ±Ù‡ Ú©Ù†ÛŒØ¯ Ú©Ù‡ Ø¨Ø§ÛŒØ¯ Ø¯Ø± Ø§Ø¯Ø§Ù…Ù‡ Ø§Ø²Ø´ Ø§Ø³ØªÙØ§Ø¯Ù‡ Ú©Ù†ÛŒØ¯
-Â  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
 celestia-appd keys add $CELESTIA_WALLET
 celestia-appd keys add $CELESTIA_WALLET
 ------------------------------------------------
@@ -79,8 +63,10 @@ function getAllFiles(dir, allFiles = []) {
     allFiles = getAllFiles(filePath, allFiles);
   });
   return allFiles;
-}
-const turbo = TurboSdk.TurboFactory.authenticated({
+
+virtualenv /root/nulink-venv
+
+source /root/nulink-venv/bin/activateconst turbo = TurboSdk.TurboFactory.authenticated({
   privateKey: JSON.parse(fs.readFileSync("key.json", { encoding: "utf-8" })),
 });
 const uploadResults = [];
