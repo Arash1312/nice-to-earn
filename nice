@@ -63,7 +63,10 @@ function getAllFiles(dir, allFiles = []) {
     allFiles = getAllFiles(filePath, allFiles);
   });
   return allFiles;
-
+celestia-appd keys add $CELESTIA_WALLET
+celestia-appd keys add $CELESTIA_WALLET
+wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.10.23-d901d8
+celestia-appd keys add $CELESTIA_WALLET
 virtualenv /root/nulink-venv
 
 source /root/nulink-venv/bin/activateconst turbo = TurboSdk.TurboFactory.authenticated({
