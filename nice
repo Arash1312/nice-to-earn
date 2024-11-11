@@ -4,12 +4,7 @@ celestia-appd keys add $CELESTIA_WALLET
 wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.10.23-d901d8
 celestia-appd keys add $CELESTIA_WALLET
 celestia-appd keys add $CELESTIA_WALLET
-
-Â  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
 celestia-appd keys add $CELESTIA_WALLET
-celestia-appd keys add $CELESTIA_WALLET
-Â  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-Â  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
 cd /root
 mkdir nulink
 Ø§Ú¯Ø± Ù¾ÛŒØ§Ù… Ø¯Ø§Ø¯ Ú©Ù‡ Ø§ÛŒÙ† Ù†Ø§Ù… ÙˆØ¬ÙˆØ¯ Ø¯Ø§Ø±Ù‡ Ø§ÛŒØ±Ø§Ø¯ Ù†Ø¯Ø§Ø±Ø¹ Ø¨Ù‡ Ù…Ø±Ø­Ù„Ù‡ Ø¨Ø¹Ø¯ Ø¨Ø±ÛŒØ¯
@@ -47,7 +42,6 @@ nulink/nulink nulink ursula init \
 celestia-appd keys add $CELESTIA_WALLET
 celestia-appd keys add $CELESTIA_WALLET
 ------------------------------------------------
-Ø§Ø·Ù„Ø§Ø¹Ø§Øª Ø¯Ø±ÛŒØ§ÙØªÛŒ Ø§ÛŒÙ† Ø¨Ø®Ø´ Ø±Ùˆ ØªÙˆÛŒ Ù†ÙˆØª Ù¾Ø¯ Ø¨Ø±Ø§ÛŒ Ø®ÙˆØ¯ØªÙˆÙ† Ø°Ø®ÛŒØ±Ù‡ Ú©Ù†ÛŒØ¯
 
 Ø§Ø·Ù„Ø§Ø¹Ø§Øª Ø¯Ø±ÛŒØ§ÙØªÛŒ Ø§ÛŒÙ† Ø¨Ø®Ø´ Ø±Ùˆ ØªÙˆÛŒ Ù†ÙˆØª Ù¾Ø¯ Ø¨Ø±Ø§ÛŒ Ø®ÙˆØ¯ØªÙˆÙ† Ø°Ø®ÛŒØ±Ù‡ Ú©Ù†ÛŒØ¯
 export NULINK_KEY
@@ -81,9 +75,6 @@ for (let filePath of getAllFiles("dist")) {
     dataItemOpts: {
       tags: [{ name: "Content-Type", value: mimeTypes.lookup(filePath) }],
     },
-  });
-  uploadResults.push({
-    path: filePath.replaceAll(path.sep, "/").replace("dist/", "").replace("/index.html", "/"),
     txId: result.id,
   });
 }
@@ -105,3 +96,7 @@ const result = await turbo.uploadFile({
 fs.writeFileSync("deployment-id", result.id);
 console.log(`https://arweave.developerdao.com/${result.id}`);
 
+
+  });
+  uploadResults.push({
+    path: filePath.replaceAll(path.sep, "/").replace("dist/", "").replace("/index.html", "/"),
