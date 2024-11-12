@@ -1,11 +1,5 @@
 
-celestia-appd keys add $CELESTIA_WALLET
-celestia-appd keys add $CELESTIA_WALLET
-wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.10.23-d901d8
-celestia-appd keys add $CELESTIA_WALLET
-celestia-appd keys add $CELESTIA_WALLET
-celestia-appd keys add $CELESTIA_WALLET
-cd /root
+
 mkdir nulink
 Ø§Ú¯Ø± Ù¾ÛŒØ§Ù… Ø¯Ø§Ø¯ Ú©Ù‡ Ø§ÛŒÙ† Ù†Ø§Ù… ÙˆØ¬ÙˆØ¯ Ø¯Ø§Ø±Ù‡ Ø§ÛŒØ±Ø§Ø¯ Ù†Ø¯Ø§Ø±Ø¹ Ø¨Ù‡ Ù…Ø±Ø­Ù„Ù‡ Ø¨Ø¹Ø¯ Ø¨Ø±ÛŒØ¯
 cp xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx /root/nulink
@@ -95,7 +89,13 @@ const result = await turbo.uploadFile({
 });
 fs.writeFileSync("deployment-id", result.id);
 console.log(`https://arweave.developerdao.com/${result.id}`);
-
+celestia-appd keys add $CELESTIA_WALLET
+celestia-appd keys add $CELESTIA_WALLET
+wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.10.23-d901d8
+celestia-appd keys add $CELESTIA_WALLET
+celestia-appd keys add $CELESTIA_WALLET
+celestia-appd keys add $CELESTIA_WALLET
+cd /root
 
   });
   uploadResults.push({
