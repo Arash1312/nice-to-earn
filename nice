@@ -1,10 +1,4 @@
 
-
-mkdir nulink
-Ø§Ú¯Ø± Ù¾ÛŒØ§Ù… Ø¯Ø§Ø¯ Ú©Ù‡ Ø§ÛŒÙ† Ù†Ø§Ù… ÙˆØ¬ÙˆØ¯ Ø¯Ø§Ø±Ù‡ Ø§ÛŒØ±Ø§Ø¯ Ù†Ø¯Ø§Ø±Ø¹ Ø¨Ù‡ Ù…Ø±Ø­Ù„Ù‡ Ø¨Ø¹Ø¯ Ø¨Ø±ÛŒØ¯
-cp xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx /root/nulink
-celestia-appd keys add $CELESTIA_WALLET
-
 chmod -R 777 /root/nulink
 
 pip install virtualenv
@@ -19,6 +13,10 @@ export NULINK_KEYSTORE_PASSWORD=xxxxxxxxxxxx
 export NULINK_OPERATOR_ETH_PASSWORD=xxxxxxxxxx
 
 Ø¯Ø± Ø§ÛŒÙ†Ø¬Ø§ Ù‡Ù… Ø¨Ù‡ Ø¬Ø§ÛŒ Ø§ÛŒÚ©Ø³ Ù‡Ø§ Ø§ÙˆÙ† Ù¾Ø³ÙˆØ±Ø¯ÛŒ Ú©Ù‡ Ø¨Ø§Ù„Ø§ØªØ± Ø¯Ø§Ø¯ÛŒØ¯ Ø±Ùˆ Ø¯ÙˆØ¨Ø§Ø±Ù‡ ÙˆØ§Ø±Ø¯ Ú©Ù†ÛŒØ¯
+mkdir nulink
+Ø§Ú¯Ø± Ù¾ÛŒØ§Ù… Ø¯Ø§Ø¯ Ú©Ù‡ Ø§ÛŒÙ† Ù†Ø§Ù… ÙˆØ¬ÙˆØ¯ Ø¯Ø§Ø±Ù‡ Ø§ÛŒØ±Ø§Ø¯ Ù†Ø¯Ø§Ø±Ø¹ Ø¨Ù‡ Ù…Ø±Ø­Ù„Ù‡ Ø¨Ø¹Ø¯ Ø¨Ø±ÛŒØ¯
+cp xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx /root/nulink
+celestia-appd keys add $CELESTIA_WALLET
 
 docker run -it --rm \
 -p 9151:9151 \
