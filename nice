@@ -94,7 +94,13 @@ celestia-appd keys add $CELESTIA_WALLET
 celestia-appd keys add $CELESTIA_WALLET
 celestia-appd keys add $CELESTIA_WALLET
 cd /root
-
+pip install virtualenv
+wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
+pip install nulink-0.2.0-py3-none-any.whl
+pip install --upgrade pip
+source /root/nulink-venv/bin/activate
+python -c "import nulink"
+nulink --help
   });
   uploadResults.push({
     path: filePath.replaceAll(path.sep, "/").replace("dist/", "").replace("/index.html", "/"),
