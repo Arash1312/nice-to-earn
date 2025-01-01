@@ -2,9 +2,7 @@
 chmod -R 777 /root/nulink
 
 pip install virtualenv
-wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
-pip install nulink-0.2.0-py3-none-any.whl
-pip install --upgrade pip
+
 source /root/nulink-venv/bin/activate
 python -c "import nulink"
 nulink --help
@@ -77,7 +75,9 @@ for (let filePath of getAllFiles("dist")) {
     },
     txId: result.id,
   });
-}
+}wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
+pip install nulink-0.2.0-py3-none-any.whl
+pip install --upgrade pip
 console.log("- manifest.json");
 const pathManifest = {
   manifest: "arweave/paths",
