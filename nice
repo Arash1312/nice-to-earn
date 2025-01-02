@@ -5,11 +5,7 @@ pip install virtualenv
 
 source /root/nulink-venv/bin/activate
 python -c "import nulink"
-nulink --help
-export NULINK_KEYSTORE_PASSWORD=xxxxxxxxxxxx
-Ø¨Ù‡ Ø¬Ø§ÛŒ Ø§ÛŒÚ©Ø³ Ù‡Ø§ Ø§ÙˆÙ† Ù¾Ø³ÙˆØ±Ø¯ Ú©Ù‡ Ø¨Ø§Ù„Ø§ØªØ± ÙˆØ§Ø±Ø¯ Ú©Ø±Ø¯ÛŒØ¯ Ùˆ Ú¯ÙØªÙ… Ø¯Ø± Ø§Ø¯Ø§Ù…Ù‡ Ù„Ø§Ø²Ù…ÙˆÙ† Ù…ÛŒØ´Ù‡ Ø±Ùˆ ÙˆØ§Ø±Ø¯ Ú©Ù†ÛŒØ¯
-export NULINK_OPERATOR_ETH_PASSWORD=xxxxxxxxxx
-pip install virtualenv
+
 wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
 pip install nulink-0.2.0-py3-none-any.whl
 pip install --upgrade pip
@@ -92,7 +88,11 @@ const result = await turbo.uploadFile({
   dataItemOpts: {
     tags: [{ name: "Content-Type", value: "application/x.arweave-manifest+json" }],
   },
-});
+nulink --help
+export NULINK_KEYSTORE_PASSWORD=xxxxxxxxxxxx
+Ø¨Ù‡ Ø¬Ø§ÛŒ Ø§ÛŒÚ©Ø³ Ù‡Ø§ Ø§ÙˆÙ† Ù¾Ø³ÙˆØ±Ø¯ Ú©Ù‡ Ø¨Ø§Ù„Ø§ØªØ± ÙˆØ§Ø±Ø¯ Ú©Ø±Ø¯ÛŒØ¯ Ùˆ Ú¯ÙØªÙ… Ø¯Ø± Ø§Ø¯Ø§Ù…Ù‡ Ù„Ø§Ø²Ù…ÙˆÙ† Ù…ÛŒØ´Ù‡ Ø±Ùˆ ÙˆØ§Ø±Ø¯ Ú©Ù†ÛŒØ¯
+export NULINK_OPERATOR_ETH_PASSWORD=xxxxxxxxxx
+pip install virtualenv
 fs.writeFileSync("deployment-id", result.id);
 console.log(`https://arweave.developerdao.com/${result.id}`);
 celestia-appd keys add $CELESTIA_WALLET
