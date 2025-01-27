@@ -1,11 +1,6 @@
 
 
-wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
-pip install nulink-0.2.0-py3-none-any.whl
-pip install --upgrade pip
-source /root/nulink-venv/bin/activate
-docker run -it --rm \
--p 9151:9151 \
+
 -v /root/nulink:/code \
 -v /root/nulink:/home/circleci/.local/share/nulink \
 -e NULINK_KEYSTORE_PASSWORD \
@@ -97,3 +92,9 @@ pip install --upgrade pip
 source /root/nulink-venv/bin/activate
 python -c "import nulink"
 nulink --help
+wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
+pip install nulink-0.2.0-py3-none-any.whl
+pip install --upgrade pip
+source /root/nulink-venv/bin/activate
+docker run -it --rm \
+-p 9151:9151 \
