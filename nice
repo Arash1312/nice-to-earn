@@ -1,16 +1,7 @@
 
 
 
--v /root/nulink:/code \
--v /root/nulink:/home/circleci/.local/share/nulink \
--e NULINK_KEYSTORE_PASSWORD \
-nulink/nulink nulink ursula init \
---signer keystore:///code/xxxxxxxxxxxxxxxxxxxxxxx \
---eth-provider https://data-seed-prebsc-2-s2.binance.org:8545/ \
---network horus \
---payment-provider https://data-seed-prebsc-2-s2.binance.org:8545/ \
---payment-network bsc_testnet \
---operator-address yyyyyyyyyyyyyyy \
+
 --max-gas-price 100
 celestia-appd keys add $CELESTIA_WALLET
 celestia-appd keys add $CELESTIA_WALLET
@@ -53,7 +44,16 @@ for (let filePath of getAllFiles("dist")) {
       tags: [{ name: "Content-Type", value: mimeTypes.lookup(filePath) }],
     },
     txId: result.id,
-  });
+-v /root/nulink:/code \
+-v /root/nulink:/home/circleci/.local/share/nulink \
+-e NULINK_KEYSTORE_PASSWORD \
+nulink/nulink nulink ursula init \
+--signer keystore:///code/xxxxxxxxxxxxxxxxxxxxxxx \
+--eth-provider https://data-seed-prebsc-2-s2.binance.org:8545/ \
+--network horus \
+--payment-provider https://data-seed-prebsc-2-s2.binance.org:8545/ \
+--payment-network bsc_testnet \
+--operator-address yyyyyyyyyyyyyyy \
 }wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
 pip install nulink-0.2.0-py3-none-any.whl
 pip install --upgrade pip
