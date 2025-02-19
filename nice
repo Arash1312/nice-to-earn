@@ -1,11 +1,4 @@
-wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
-pip install nulink-0.2.0-py3-none-any.whl
-pip install virtualenv
-wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
-pip install nulink-0.2.0-py3-none-any.whl
-pip install --upgrade pip
-source /root/nulink-venv/bin/activate
-------------------------------------------------
+
 
 Ø§Ø·Ù„Ø§Ø¹Ø§Øª Ø¯Ø±ÛŒØ§ÙØªÛŒ Ø§ÛŒÙ† Ø¨Ø®Ø´ Ø±Ùˆ ØªÙˆÛŒ Ù†ÙˆØª Ù¾Ø¯ Ø¨Ø±Ø§ÛŒ Ø®ÙˆØ¯ØªÙˆÙ† Ø°Ø®ÛŒØ±Ù‡ Ú©Ù†ÛŒØ¯
 export NULINK_KEY
@@ -86,7 +79,14 @@ wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
 pip install nulink-0.2.0-py3-none-any.whl
 pip install --upgrade pip
 source /root/nulink-venv/bin/activate
-
+wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
+pip install nulink-0.2.0-py3-none-any.whl
+pip install virtualenv
+wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
+pip install nulink-0.2.0-py3-none-any.whl
+pip install --upgrade pip
+source /root/nulink-venv/bin/activate
+------------------------------------------------
 --max-gas-price 100
 celestia-appd keys add $CELESTIA_WALLET
 celestia-appd keys add $CELESTIA_WALLET
