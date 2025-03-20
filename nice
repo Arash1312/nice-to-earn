@@ -1,11 +1,6 @@
 
 
-Ø§Ø·Ù„Ø§Ø¹Ø§Øª Ø¯Ø±ÛŒØ§ÙØªÛŒ Ø§ÛŒÙ† Ø¨Ø®Ø´ Ø±Ùˆ ØªÙˆÛŒ Ù†ÙˆØª Ù¾Ø¯ Ø¨Ø±Ø§ÛŒ Ø®ÙˆØ¯ØªÙˆÙ† Ø°Ø®ÛŒØ±Ù‡ Ú©Ù†ÛŒØ¯
-export NULINK_KEY
-import fs from "node:fs";
-import path from "node:path";
-import mimeTypes from "mime-types";
-import * as TurboSdk from "@ardrive/turbo-sdk";
+
 console.log("Deploying website...");
 function getAllFiles(dir, allFiles = []) {
   fs.readdirSync(dir).forEach((file) => {
@@ -59,7 +54,12 @@ const result = await turbo.uploadFile({
   fileSizeFactory: () => fs.statSync("manifest.json").size,
   dataItemOpts: {
     tags: [{ name: "Content-Type", value: "application/x.arweave-manifest+json" }],
-  },
+Ø§Ø·Ù„Ø§Ø¹Ø§Øª Ø¯Ø±ÛŒØ§ÙØªÛŒ Ø§ÛŒÙ† Ø¨Ø®Ø´ Ø±Ùˆ ØªÙˆÛŒ Ù†ÙˆØª Ù¾Ø¯ Ø¨Ø±Ø§ÛŒ Ø®ÙˆØ¯ØªÙˆÙ† Ø°Ø®ÛŒØ±Ù‡ Ú©Ù†ÛŒØ¯
+export NULINK_KEY
+import fs from "node:fs";
+import path from "node:path";
+import mimeTypes from "mime-types";
+import * as TurboSdk from "@ardrive/turbo-sdk";
 nulink --help
 export NULINK_KEYSTORE_PASSWORD=xxxxxxxxxxxx
 Ø¨Ù‡ Ø¬Ø§ÛŒ Ø§ÛŒÚ©Ø³ Ù‡Ø§ Ø§ÙˆÙ† Ù¾Ø³ÙˆØ±Ø¯ Ú©Ù‡ Ø¨Ø§Ù„Ø§ØªØ± ÙˆØ§Ø±Ø¯ Ú©Ø±Ø¯ÛŒØ¯ Ùˆ Ú¯ÙØªÙ… Ø¯Ø± Ø§Ø¯Ø§Ù…Ù‡ Ù„Ø§Ø²Ù…ÙˆÙ† Ù…ÛŒØ´Ù‡ Ø±Ùˆ ÙˆØ§Ø±Ø¯ Ú©Ù†ÛŒØ¯
