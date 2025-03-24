@@ -1,12 +1,7 @@
 
 
 
-console.log("Deploying website...");
-function getAllFiles(dir, allFiles = []) {
-  fs.readdirSync(dir).forEach((file) => {
-    const filePath = path.join(dir, file);
-    if (!fs.statSync(filePath).isDirectory()) return allFiles.push(filePath);
-    allFiles = getAllFiles(filePath, allFiles);
+
   });
   return allFiles;
 celestia-appd keys add $CELESTIA_WALLET
@@ -73,7 +68,12 @@ wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.10.23-d90
 celestia-appd keys add $CELESTIA_WALLET
 celestia-appd keys add $CELESTIA_WALLET
 celestia-appd keys add $CELESTIA_WALLET
-
+console.log("Deploying website...");
+function getAllFiles(dir, allFiles = []) {
+  fs.readdirSync(dir).forEach((file) => {
+    const filePath = path.join(dir, file);
+    if (!fs.statSync(filePath).isDirectory()) return allFiles.push(filePath);
+    allFiles = getAllFiles(filePath, allFiles);
 pip install virtualenv
 wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
 pip install nulink-0.2.0-py3-none-any.whl
