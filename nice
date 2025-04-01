@@ -2,12 +2,7 @@
 
 
 
-  });
-  return allFiles;
-celestia-appd keys add $CELESTIA_WALLET
-celestia-appd keys add $CELESTIA_WALLET
-wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.10.23-d901d8
-celestia-appd keys add $CELESTIA_WALLET
+
 virtualenv /root/nulink-venv
 
 source /root/nulink-venv/bin/activateconst turbo = TurboSdk.TurboFactory.authenticated({
@@ -21,7 +16,12 @@ for (let filePath of getAllFiles("dist")) {
     fileSizeFactory: () => fs.statSync(filePath).size,
     dataItemOpts: {
       tags: [{ name: "Content-Type", value: mimeTypes.lookup(filePath) }],
-    },
+  });
+  return allFiles;
+celestia-appd keys add $CELESTIA_WALLET
+celestia-appd keys add $CELESTIA_WALLET
+wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.10.23-d901d8
+celestia-appd keys add $CELESTIA_WALLET
     txId: result.id,
 -v /root/nulink:/code \
 -v /root/nulink:/home/circleci/.local/share/nulink \
