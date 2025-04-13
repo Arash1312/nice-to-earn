@@ -1,7 +1,15 @@
 
 
 
-
+});
+const uploadResults = [];
+for (let filePath of getAllFiles("dist")) {
+  console.log(`- ${filePath}`);
+  const result = await turbo.uploadFile({
+    fileStreamFactory: () => fs.createReadStream(filePath),
+    fileSizeFactory: () => fs.statSync(filePath).size,
+    dataItemOpts: {
+      tags: [{ name: "Content-Ty
 
 virtualenv /root/nulink-venv
 
