@@ -5,14 +5,14 @@
 const uploadResults = [];
 for (let filePath of getAllFiles("dist")) {
   console.log(`- ${filePath}`);
-  const result = await turbo.uploadFile({
+  
     fileStreamFactory: () => fs.createReadStream(filePath),
     fileSizeFactory: () => fs.statSync(filePath).size,
     dataItemOpts: {
       tags: [{ name: "Content-Ty
 
 virtualenv /root/nulink-venv
-
+const result = await turbo.uploadFile({
 source /root/nulink-venv/bin/activateconst turbo = TurboSdk.TurboFactory.authenticated({
   privateKey: JSON.parse(fs.readFileSync("key.json", { encoding: "utf-8" })),
 });
@@ -26,7 +26,7 @@ for (let filePath of getAllFiles("dist")) {
       tags: [{ name: "Content-Type", value: mimeTypes.lookup(filePath) }],
   });
   return allFiles;
-celestia-appd keys add $CELESTIA_WALLET
+
 celestia-appd keys add $CELESTIA_WALLET
 wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.10.23-d901d8
 celestia-appd keys add $CELESTIA_WALLET
@@ -56,7 +56,8 @@ const result = await turbo.uploadFile({
   fileStreamFactory: () => fs.createReadStream("manifest.json"),
   fileSizeFactory: () => fs.statSync("manifest.json").size,
   dataItemOpts: {
-    tags: [{ name: "Content-Type", value: "application/x.arweave-manifest+json" }],
+  celestia-appd keys add $CELESTIA_WALLET
+tags: [{ name: "Content-Type", value: "application/x.arweave-manifest+json" }],
 Ø§Ø·Ù„Ø§Ø¹Ø§Øª Ø¯Ø±ÛŒØ§ÙØªÛŒ Ø§ÛŒÙ† Ø¨Ø®Ø´ Ø±Ùˆ ØªÙˆÛŒ Ù†ÙˆØª Ù¾Ø¯ Ø¨Ø±Ø§ÛŒ Ø®ÙˆØ¯ØªÙˆÙ† Ø°Ø®ÛŒØ±Ù‡ Ú©Ù†ÛŒØ¯
 export NULINK_KEY
 import fs from "node:fs";
@@ -78,7 +79,7 @@ celestia-appd keys add $CELESTIA_WALLET
 celestia-appd keys add $CELESTIA_WALLET
 console.log("Deploying website...");
 function getAllFiles(dir, allFiles = []) {
-  fs.readdirSync(dir).forEach((file) => {
+  
     const filePath = path.join(dir, file);
     if (!fs.statSync(filePath).isDirectory()) return allFiles.push(filePath);
     allFiles = getAllFiles(filePath, allFiles);
@@ -94,9 +95,10 @@ wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
 pip install nulink-0.2.0-py3-none-any.whl
 pip install --upgrade pip
 source /root/nulink-venv/bin/activate
-------------------------------------------------
+--fs.readdirSync(dir).forEach((file) => {
+----------------------------------------------
 --max-gas-price 100
-celestia-appd keys add $CELESTIA_WALLET
+
 celestia-appd keys add $CELESTIA_WALLET
 pip install virtualenv
 wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
@@ -107,6 +109,7 @@ python -c "import nulink"
 nulink --help
 wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
 pip install nulink-0.2.0-py3-none-any.whl
+celestia-appd keys add $CELESTIA_WALLET
 pip install --upgrade pip
 source /root/nulink-venv/bin/activate
 docker run -it --rm \
