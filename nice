@@ -1,5 +1,5 @@
 
-
+const result = await turbo.uploadFile({
 
 });
 const uploadResults = [];
@@ -19,7 +19,7 @@ source /root/nulink-venv/bin/activateconst turbo = TurboSdk.TurboFactory.authent
 const uploadResults = [];
 for (let filePath of getAllFiles("dist")) {
   console.log(`- ${filePath}`);
-  const result = await turbo.uploadFile({
+  
     fileStreamFactory: () => fs.createReadStream(filePath),
     fileSizeFactory: () => fs.statSync(filePath).size,
     dataItemOpts: {
