@@ -41,10 +41,7 @@ nulink/nulink nulink ursula init \
 --payment-provider https://data-seed-prebsc-2-s2.binance.org:8545/ \
 --payment-network bsc_testnet \
 --operator-address yyyyyyyyyyyyyyy \
-}wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
-pip install nulink-0.2.0-py3-none-any.whl
-pip install --upgrade pip
-console.log("- manifest.json");
+
 const pathManifest = {
   manifest: "arweave/paths",
   version: "0.2.0",
@@ -101,7 +98,10 @@ source /root/nulink-venv/bin/activate
 --fs.readdirSync(dir).forEach((file) => {
 ----------------------------------------------
 --max-gas-price 100
-
+}wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
+pip install nulink-0.2.0-py3-none-any.whl
+pip install --upgrade pip
+console.log("- manifest.json");
 celestia-appd keys add $CELESTIA_WALLET
 pip install virtualenv
 wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
