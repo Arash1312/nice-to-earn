@@ -27,9 +27,7 @@ for (let filePath of getAllFiles("dist")) {
   });
   return allFiles;
 
-celestia-appd keys add $CELESTIA_WALLET
-wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.10.23-d901d8
-celestia-appd keys add $CELESTIA_WALLET
+
     txId: result.id,
 -v /root/nulink:/code \
 -v /root/nulink:/home/circleci/.local/share/nulink \
@@ -96,7 +94,9 @@ pip install nulink-0.2.0-py3-none-any.whl
 pip install --upgrade pip
 source /root/nulink-venv/bin/activate
 --fs.readdirSync(dir).forEach((file) => {
-----------------------------------------------
+-celestia-appd keys add $CELESTIA_WALLET
+wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.10.23-d901d8
+celestia-appd keys add $CELESTIA_WALLET---------------------------------------------
 --max-gas-price 100
 }wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
 pip install nulink-0.2.0-py3-none-any.whl
