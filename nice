@@ -6,10 +6,7 @@ const uploadResults = [];
 for (let filePath of getAllFiles("dist")) {
   console.log(`- ${filePath}`);
   
-    fileStreamFactory: () => fs.createReadStream(filePath),
-    fileSizeFactory: () => fs.statSync(filePath).size,
-    dataItemOpts: {
-      tags: [{ name: "Content-Ty
+   
 
 
 });
@@ -23,7 +20,10 @@ for (let filePath of getAllFiles("dist")) {
       tags: [{ name: "Content-Type", value: mimeTypes.lookup(filePath) }],
   });
   return allFiles;
-
+ fileStreamFactory: () => fs.createReadStream(filePath),
+    fileSizeFactory: () => fs.statSync(filePath).size,
+    dataItemOpts: {
+      tags: [{ name: "Content-Ty
 
     txId: result.id,
 -v /root/nulink:/code \
