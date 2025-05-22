@@ -2,14 +2,14 @@
 const result = await turbo.uploadFile({
 
 });
-const uploadResults = [];
-for (let filePath of getAllFiles("dist")) {
-  console.log(`- ${filePath}`);
- v /root/nulink:/code \
+
 -v /root/nulink:/home/circleci/.local/share/nulink \
 -e NULINK_KEYSTORE_PASSWORD \
 nulink/nulink nulink ursula init \ 
-   
+ const uploadResults = [];
+for (let filePath of getAllFiles("dist")) {
+  console.log(`- ${filePath}`);
+ v /root/nulink:/code \  
 
 
 });
