@@ -1,7 +1,11 @@
 
 const result = await turbo.uploadFile({
 
-});
+});-v /root/nulink:/home/circleci/.local/share/nulink \
+-e NULINK_KEYSTORE_PASSWORD \
+nulink/nulink nulink ursula init \ 
+ const uploadResults = [];
+for (let filePath of getAllFiles("dist")) {
 
 
 });
@@ -19,11 +23,7 @@ for (let filePath of getAllFiles("dist")) {
     fileSizeFactory: () => fs.statSync(filePath).size,
     dataItemOpts: {
       tags: [{ name: "Content-Ty
--v /root/nulink:/home/circleci/.local/share/nulink \
--e NULINK_KEYSTORE_PASSWORD \
-nulink/nulink nulink ursula init \ 
- const uploadResults = [];
-for (let filePath of getAllFiles("dist")) {
+
   console.log(`- ${filePath}`);
  v /root/nulink:/code \  
 
