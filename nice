@@ -6,17 +6,17 @@ const result = await turbo.uploadFile({
 nulink/nulink nulink ursula init \ 
  const uploadResults = [];
 for (let filePath of getAllFiles("dist")) {
-
+ fileStreamFactory: () => fs.createReadStream(filePath),
+    fileSizeFactory: () => fs.statSync(filePath).size,
+    dataItemOpts: {
+      tags: [{ name: "Content-Type", value: mimeTypes.lookup(filePath) }],
 
 });
 const uploadResults = [];
 for (let filePath of getAllFiles("dist")) {
   console.log(`- ${filePath}`);
   
-    fileStreamFactory: () => fs.createReadStream(filePath),
-    fileSizeFactory: () => fs.statSync(filePath).size,
-    dataItemOpts: {
-      tags: [{ name: "Content-Type", value: mimeTypes.lookup(filePath) }],
+   
   });
   return allFiles;
  fileStreamFactory: () => fs.createReadStream(filePath),
