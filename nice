@@ -18,11 +18,7 @@ for (let filePath of getAllFiles("dist")) {
   
    
   });
-  return allFiles;
- fileStreamFactory: () => fs.createReadStream(filePath),
-    fileSizeFactory: () => fs.statSync(filePath).size,
-    dataItemOpts: {
-      tags: [{ name: "Content-Ty
+
 
   console.log(`- ${filePath}`);
  v /root/nulink:/code \  
@@ -48,7 +44,11 @@ const result = await turbo.uploadFile({
 source /root/nulink-venv/bin/activateconst turbo = TurboSdk.TurboFactory.authenticated({
   privateKey: JSON.parse(fs.readFileSync("key.json", { encoding: "utf-8" })),
 
-};
+};  return allFiles;
+ fileStreamFactory: () => fs.createReadStream(filePath),
+    fileSizeFactory: () => fs.statSync(filePath).size,
+    dataItemOpts: {
+      tags: [{ name: "Content-Ty
 
   dataItemOpts: {
   celestia-appd keys add $CELESTIA_WALLET
