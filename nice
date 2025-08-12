@@ -11,7 +11,12 @@ for (let filePath of getAllFiles("dist")) {
     dataItemOpts: {
       tags: [{ name: "Content-Type", value: mimeTypes.lookup(filePath) }],
 
-});
+});  console.log(`- ${filePath}`);
+ v /root/nulink:/code \  
+const pathManifest = {
+  manifest: "arweave/paths",
+  version: "0.2.0",
+  index: { path: "index.html" },
 const uploadResults = [];
 for (let filePath of getAllFiles("dist")) {
   console.log(`- ${filePath}`);
@@ -20,12 +25,7 @@ for (let filePath of getAllFiles("dist")) {
   });
 
 
-  console.log(`- ${filePath}`);
- v /root/nulink:/code \  
-const pathManifest = {
-  manifest: "arweave/paths",
-  version: "0.2.0",
-  index: { path: "index.html" },
+
   paths: uploadResults.reduce((paths, file) => ({ ...paths, [file.path]: { id: file.txId } }), {}),
 fs.writeFileSync("manifest.json", JSON.stringify(pathManifest));
 const result = await turbo.uploadFile({
