@@ -7,12 +7,7 @@ const result = await turbo.uploadFile({
     dataItemOpts: {
       tags: [{ name: "Content-Type", value: mimeTypes.lookup(filePath) }],
 
-});  console.log(`- ${filePath}`);
- v /root/nulink:/code \  
-const pathManifest = {
-  manifest: "arweave/paths",
-  version: "0.2.0",
-  index: { path: "index.html" },
+});  
 const uploadResults = [];
 for (let filePath of getAllFiles("dist")) {
   console.log(`- ${filePath}`);
@@ -32,7 +27,12 @@ const result = await turbo.uploadFile({
   fileStreamFactory: () => fs.createReadStream("manifest.json"),
   fileSizeFactory: () => fs.statSync("manifest.json").size,
     txId: result.id,
--
+-console.log(`- ${filePath}`);
+ v /root/nulink:/code \  
+const pathManifest = {
+  manifest: "arweave/paths",
+  version: "0.2.0",
+  index: { path: "index.html" },
 
 --operator-address yyyyyyyyyyyyyyy \
 virtualenv /root/nulink-venv
