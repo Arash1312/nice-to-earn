@@ -11,7 +11,9 @@ const result = await turbo.uploadFile({
 const uploadResults = [];
 for (let filePath of getAllFiles("dist")) {
   console.log(`- ${filePath}`);
-  
+   dataItemOpts: {
+      tags: [{ name: "Content-Type", value: mimeTypes.lookup(filePath) }],
+
    --signer keystore:///code/xxxxxxxxxxxxxxxxxxxxxxx \
 --eth-provider https://data-seed-prebsc-2-s2.binance.org:8545/ \
 --network horus \
