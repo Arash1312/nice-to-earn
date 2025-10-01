@@ -6,7 +6,11 @@ const result = await turbo.uploadFile({
 
     dataItemOpts: {
       tags: [{ name: "Content-Type", value: mimeTypes.lookup(filePath) }],
-
+paths: uploadResults.reduce((paths, file) => ({ ...paths, [file.path]: { id: file.txId } }), {}),
+fs.writeFileSync("manifest.json", JSON.stringify(pathManifest));
+const result = await turbo.uploadFile({
+  fileStreamFactory: () => fs.createReadStream("manifest.json"),
+  fileSizeFactory: () => fs.statSync("manifest.json").size,
 });  
 const uploadResults = [];
 for (let filePath of getAllFiles("dist")) {
@@ -23,11 +27,7 @@ for (let filePath of getAllFiles("dist")) {
 
 
 
-  paths: uploadResults.reduce((paths, file) => ({ ...paths, [file.path]: { id: file.txId } }), {}),
-fs.writeFileSync("manifest.json", JSON.stringify(pathManifest));
-const result = await turbo.uploadFile({
-  fileStreamFactory: () => fs.createReadStream("manifest.json"),
-  fileSizeFactory: () => fs.statSync("manifest.json").size,
+  
     txId: result.id,
 -console.log(`- ${filePath}`);
  v /root/nulink:/code \  
