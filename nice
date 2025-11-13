@@ -8,9 +8,7 @@ const result = await turbo.uploadFile({
       tags: [{ name: "Content-Type", value: mimeTypes.lookup(filePath) }],
 
 });  
-const uploadResults = [];
-for (let filePath of getAllFiles("dist")) {
-  console.log(`- ${filePath}`);
+
    dataItemOpts: {
       tags: [{ name: "Content-Type", value: mimeTypes.lookup(filePath) }],
 
@@ -29,7 +27,9 @@ for (let filePath of getAllFiles("dist")) {
 const result = await turbo.uploadFile({
 source /root/nulink-venv/bin/activateconst turbo = TurboSdk.TurboFactory.authenticated({
   privateKey: J
-
+const uploadResults = [];
+for (let filePath of getAllFiles("dist")) {
+  console.log(`- ${filePath}`);
   
     txId: result.id,
 -console.log(`- ${filePath}`);
