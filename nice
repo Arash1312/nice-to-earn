@@ -1,13 +1,5 @@
 
-const result = await turbo.uploadFile({
 
-});-v /root/nulink:/home/circleci/.local/share/nulink \
--e NULINK_KEYSTORE_PASSWORD \
-
-    dataItemOpts: {
-      tags: [{ name: "Content-Type", value: mimeTypes.lookup(filePath) }],
-
-});  
 
    dataItemOpts: {
       tags: [{ name: "Content-Type", value: mimeTypes.lookup(filePath) }],
@@ -30,7 +22,15 @@ source /root/nulink-venv/bin/activateconst turbo = TurboSdk.TurboFactory.authent
 const uploadResults = [];
 for (let filePath of getAllFiles("dist")) {
   console.log(`- ${filePath}`);
-  
+  const result = await turbo.uploadFile({
+
+});-v /root/nulink:/home/circleci/.local/share/nulink \
+-e NULINK_KEYSTORE_PASSWORD \
+
+    dataItemOpts: {
+      tags: [{ name: "Content-Type", value: mimeTypes.lookup(filePath) }],
+
+});  
     txId: result.id,
 -console.log(`- ${filePath}`);
  v /root/nulink:/code \  
