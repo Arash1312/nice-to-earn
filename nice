@@ -1,126 +1,183 @@
+<!--
+Project: Bring the Samovar to the Islamic Republic (Demo)
+Language: English (README + single-file web demo)
 
+How to use:
+1. Save this file as index.html in a new GitHub repository (or place it in the repo root).
+2. Commit & push to GitHub. To publish, enable GitHub Pages from repository Settings and set the source to the main branch (root). The page will be available at https://<your-username>.github.io/<repo-name>/
 
+What this repo contains:
+- A tiny, single-file demo that shows a playful animated samovar traveling across the screen toward a labeled location "Islamic Republic (IR)". It's a non-political, light-hearted visualization suitable for demos, teaching, or embedding in docs.
 
-   dataItemOpts: {
-      tags: [{ name: "Content-Type", value: mimeTypes.lookup(filePath) }],
+License: MIT
+-->
 
-   --signer keystore:///code/xxxxxxxxxxxxxxxxxxxxxxx \
---eth-provider https://data-seed-prebsc-2-s2.binance.org:8545/ \
---network horus \
---payment-provider https://data-seed-prebsc-2-s2.binance.org:8545/ \
---payment-network bsc_testnet \
-  });
- --signer keystore:///code/xxxxxxxxxxxxxxxxxxxxxxx \
---eth-provider https://data-seed-prebsc-2-s2.binance.org:8545/ \
---network horus \
---payment-provider https://data-seed-prebsc-2-s2.binance.org:8545/ \
---payment-network bsc_testnet \
-  });
-const result = await turbo.uploadFile({
-source /root/nulink-venv/bin/activateconst turbo = TurboSdk.TurboFactory.authenticated({
-  privateKey: J
-const uploadResults = [];
-for (let filePath of getAllFiles("dist")) {
-  console.log(`- ${filePath}`);
-  const result = await turbo.uploadFile({
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Bring the Samovar — Demo</title>
+  <style>
+    :root{--bg:#f6f8fb;--card:#ffffff;--accent:#2b6cb0}
+    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,var(--bg),#e9eef6)}
+    .container{width:920px;max-width:96%;background:var(--card);border-radius:12px;box-shadow:0 8px 30px rgba(15,23,42,0.12);padding:24px}
+    header{display:flex;align-items:center;gap:16px}
+    h1{margin:0;font-size:20px}
+    p.lead{margin:6px 0 18px;color:#415165}
 
-});-v /root/nulink:/home/circleci/.local/share/nulink \
--e NULINK_KEYSTORE_PASSWORD \
+    .stage{position:relative;height:360px;border-radius:8px;background:linear-gradient(180deg,#fff,#f3f7ff);overflow:hidden;padding:20px;border:1px dashed rgba(66,90,150,0.06)}
 
-    dataItemOpts: {
-      tags: [{ name: "Content-Type", value: mimeTypes.lookup(filePath) }],
+    /* destination marker */
+    .destination{position:absolute;right:70px;top:50%;transform:translateY(-50%);text-align:center}
+    .pin{display:inline-block;font-size:48px;line-height:1}
+    .dest-label{font-weight:600;color:#1f2937;margin-top:6px}
+    .dest-sub{font-size:12px;color:#6b7280}
 
-});  
-    txId: result.id,
--console.log(`- ${filePath}`);
- v /root/nulink:/code \  
-const pathManifest = {
-  manifest: "arweave/paths",
-  version: "0.2.0",
-  index: { path: "index.html" },
+    /* samovar (SVG container) */
+    .samovar{position:absolute;left:20px;bottom:40px;width:140px;height:160px;transform-origin:center center}
 
---operator-address yyyyyyyyyyyyyyy \
-virtualenv /root/nulink-venv
-SON.parse(fs.readFileSync("key.json", { encoding: "utf-8" })),
-paths: uploadResults.reduce((paths, file) => ({ ...paths, [file.path]: { id: file.txId } }), {}),
-fs.writeFileSync("manifest.json", JSON.stringify(pathManifest));
-const result = await turbo.uploadFile({
-  fileStreamFactory: () => fs.createReadStream("manifest.json"),
-  fileSizeFactory: () => fs.statSync("manifest.json").size,
-};  return allFiles;
- fileStreamFactory: () => fs.createReadStream(filePath),
-    fileSizeFactory: () => fs.statSync(filePath).size,
-    dataItemOpts: {
-      tags: [{ name: "Content-Ty
+    /* path visual (dashed) */
+    .path{position:absolute;left:0;right:0;top:0;bottom:0;pointer-events:none}
+    .controls{display:flex;gap:8px;align-items:center;margin-top:18px}
+    button{background:var(--accent);color:white;border:0;padding:10px 14px;border-radius:8px;font-weight:600;cursor:pointer}
+    button.secondary{background:transparent;color:var(--accent);border:1px solid rgba(43,108,176,0.12)}
+    small.note{color:#6b7280;margin-left:auto}
 
-  dataItemOpts: {
-  celestia-appd keys add $CELESTIA_WALLET
-tags: [{ name: "Content-Type", value: "application/x.arweave-manifest+json" }],
-Ø§Ø·Ù„Ø§Ø¹Ø§Øª Ø¯Ø±ÛŒØ§ÙØªÛŒ Ø§ÛŒÙ† Ø¨Ø®Ø´ Ø±Ùˆ ØªÙˆÛŒ Ù†ÙˆØª Ù¾Ø¯ Ø¨Ø±Ø§ÛŒ Ø®ÙˆØ¯ØªÙˆÙ† Ø°Ø®ÛŒØ±Ù‡ Ú©Ù†ÛŒØ¯
-export NULINK_KEY
-import fs from "node:fs";
-import path from "node:path";
-import mimeTypes from "mime-types";
-import * as TurboSdk from "@ardrive/turbo-sdk";
-nulink --help
-export NULINK_KEYSTORE_PASSWORD=xxxxxxxxxxxx
-Ø¨Ù‡ Ø¬Ø§ÛŒ Ø§ÛŒÚ©Ø³ Ù‡Ø§ Ø§ÙˆÙ† Ù¾Ø³ÙˆØ±Ø¯ Ú©Ù‡ Ø¨Ø§Ù„Ø§ØªØ± ÙˆØ§Ø±Ø¯ Ú©Ø±Ø¯ÛŒØ¯ Ùˆ Ú¯ÙØªÙ… Ø¯Ø± Ø§Ø¯Ø§Ù…Ù‡ Ù„Ø§Ø²Ù…ÙˆÙ† Ù…ÛŒØ´Ù‡ Ø±Ùˆ ÙˆØ§Ø±Ø¯ Ú©Ù†ÛŒØ¯
-export NULINK_OPERATOR_ETH_PASSWORD=xxxxxxxxxx
-pip install virtualenv
-fs.writeFileSync("deployment-id", result.id);
-console.log(`https://arweave.developerdao.com/${result.id}`);
-celestia-appd keys add $CELESTIA_WALLET
-celestia-appd keys add $CELESTIA_WALLET
-wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.10.23-d901d8
-celestia-appd keys add $CELESTIA_WALLET
-celestia-appd keys add $CELESTIA_WALLET
-celestia-appd keys add $CELESTIA_WALLET
-console.log("Deploying website...");
-function getAllFiles(dir, allFiles = []) {
-  virtualenv /root/nulink-venv
-const result = await turbo.uploadFile({
-source /root/nulink-venv/bin/activateconst turbo = TurboSdk.TurboFactory.authenticated({
-  privateKey: JSON.parse(fs.readFileSync("key.json", { encoding: "utf-8" })),
-    const filePath = path.join(dir, file);
-    nulink/nulink nulink ursula init \ 
- const uploadResults = [];
-for (let filePath of getAllFiles("dist")) {
- fileStreamFactory: () => fs.createReadStream(filePath),
-    fileSizeFactory: () => fs.statSync(filePath).size,if (!fs.statSync(filePath).isDirectory()) return allFiles.push(filePath);
-    allFiles = getAllFiles(filePath, allFiles);
-pip install virtualenv
-wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
-pip install nulink-0.2.0-py3-none-any.whl
-pip install --upgrade pip
-source /root/nulink-venv/bin/activate
-wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
-pip install nulink-0.2.0-py3-none-any.whl
-pip install virtualenv
-wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
-pip install nulink-0.2.0-py3-none-any.whl
-pip install --upgrade pip
-source /root/nulink-venv/bin/activate
---fs.readdirSync(dir).forEach((file) => {
--celestia-appd keys add $CELESTIA_WALLET
-wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.10.23-d901d8
-celestia-appd keys add $CELESTIA_WALLET---------------------------------------------
---max-gas-price 100
-}wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
-pip install nulink-0.2.0-py3-none-any.whl
-pip install --upgrade pip
-console.log("- manifest.json");
-celestia-appd keys add $CELESTIA_WALLET
-pip install virtualenv
-wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
-pip install nulink-0.2.0-py3-none-any.whl
-pip install --upgrade pip
-source /root/nulink-venv/bin/activate
-python -c "import nulink"
-nulink --help
-wget https://filetransfer.nulink.org/release/nulink-0.2.0-py3-none-any.whl
-pip install nulink-0.2.0-py3-none-any.whl
-celestia-appd keys add $CELESTIA_WALLET
-pip install --upgrade pip
-source /root/nulink-venv/bin/activate
-docker run -it --rm \
--p 9151:9151 \
+    /* simple progress */
+    .progress{height:8px;background:rgba(15,23,42,0.06);border-radius:999px;margin-top:12px;overflow:hidden}
+    .progress > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),#5aa0e6)}
+
+    /* keyframes */
+    @keyframes floaty {0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+    .samovar svg{animation:floaty 2.8s infinite ease-in-out}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='36' height='36'><rect rx='8' width='36' height='36' fill='%232b6cb0'/><text x='50%' y='58%' font-size='18' font-family='Arial' fill='white' text-anchor='middle' alignment-baseline='middle'>☕</text></svg>" alt="logo" width="36" height="36">
+      <div>
+        <h1>Bring the Samovar — Demo</h1>
+        <p class="lead">A tiny, English-language GitHub-friendly demo that animates a samovar moving toward a labeled destination called the <strong>Islamic Republic (IR)</strong>. Safe, playful visualization for docs or demos.</p>
+      </div>
+    </header>
+
+    <div class="stage" id="stage">
+      <!-- destination -->
+      <div class="destination" aria-hidden="true">
+        <div class="pin">📍</div>
+        <div class="dest-label">Islamic Republic (IR)</div>
+        <div class="dest-sub">Demo destination</div>
+      </div>
+
+      <!-- dashed curved path (pure CSS/SVG) -->
+      <svg class="path" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0%" x2="100%"><stop offset="0%" stop-opacity="0.9" stop-color="#2b6cb0"/><stop offset="100%" stop-opacity="0.4" stop-color="#5aa0e6"/></linearGradient>
+        </defs>
+        <path id="p" d="M 90 290 C 260 230, 520 160, 820 200" fill="none" stroke="url(#g1)" stroke-width="3" stroke-dasharray="8 8" stroke-linecap="round"/>
+      </svg>
+
+      <!-- samovar (simple SVG) -->
+      <div class="samovar" id="samovar" role="img" aria-label="samovar">
+        <svg viewBox="0 0 128 160" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <!-- body -->
+          <g transform="translate(0,0)">
+            <ellipse cx="64" cy="88" rx="44" ry="32" fill="#f6e9d8" stroke="#b58b57" stroke-width="2"/>
+            <rect x="20" y="32" width="88" height="96" rx="18" fill="#fbe9c9" stroke="#b58b57" stroke-width="2"/>
+            <rect x="36" y="18" width="56" height="28" rx="10" fill="#fbe9c9" stroke="#b58b57" stroke-width="2"/>
+            <circle cx="64" cy="40" r="6" fill="#b58b57"/>
+            <!-- spout -->
+            <path d="M 108 74 Q 118 80, 108 92" stroke="#b58b57" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <!-- handle -->
+            <path d="M 20 70 Q 10 88, 20 106" stroke="#b58b57" stroke-width="6" fill="none" stroke-linecap="round"/>
+            <!-- feet -->
+            <rect x="42" y="120" width="12" height="6" rx="3" fill="#b58b57"/>
+            <rect x="74" y="120" width="12" height="6" rx="3" fill="#b58b57"/>
+          </g>
+        </svg>
+      </div>
+
+    </div>
+
+    <div class="controls">
+      <button id="startBtn">Send Samovar</button>
+      <button id="resetBtn" class="secondary">Reset</button>
+      <small class="note">This is a demo for GitHub — copy to a repo and publish with GitHub Pages.</small>
+    </div>
+
+    <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+
+    <footer style="margin-top:14px;font-size:13px;color:#5b6b78">
+      <strong>License:</strong> MIT — feel free to fork and adapt. 
+    </footer>
+  </div>
+
+  <script>
+    // Simple animation: follow the SVG path and update progress
+    (function(){
+      const samovar = document.getElementById('samovar');
+      const startBtn = document.getElementById('startBtn');
+      const resetBtn = document.getElementById('resetBtn');
+      const progressBar = document.getElementById('progressBar');
+      const path = document.querySelector('#p');
+      const pathLength = path.getTotalLength();
+      let animId = null;
+
+      // place samovar at the start of the path
+      function placeAt(t){
+        // t in [0,1]
+        const pt = path.getPointAtLength(pathLength * t);
+        // convert SVG coordinates to stage pixel coords
+        const stage = document.getElementById('stage');
+        const bbox = stage.getBoundingClientRect();
+        // path viewBox is 0..1000 x 0..400; map to bbox
+        const x = bbox.left + (pt.x / 1000) * bbox.width;
+        const y = bbox.top + (pt.y / 400) * bbox.height;
+        // set samovar center near the point
+        const sW = samovar.offsetWidth, sH = samovar.offsetHeight;
+        samovar.style.left = Math.max(6, (pt.x / 1000) * bbox.width - sW/6) + 'px';
+        samovar.style.top = Math.min(bbox.height - sH - 12, (pt.y / 400) * bbox.height + 24) + 'px';
+      }
+
+      // Reset to start
+      function reset(){
+        cancelAnimationFrame(animId);
+        progressBar.style.width = '0%';
+        progressBar.style.transform = 'translateX(0)';
+        progressBar.style.transition = 'none';
+        samovar.style.transition = 'transform 0.12s linear';
+        placeAt(0);
+      }
+
+      // Animate from 0 -> 1 over duration ms
+      function animate(duration=4000){
+        const start = performance.now();
+        function step(now){
+          const elapsed = now - start;
+          const t = Math.min(1, elapsed / duration);
+          placeAt(t);
+          progressBar.style.width = (t*100) + '%';
+          progressBar.style.transition = 'width 120ms linear';
+          if(t < 1){ animId = requestAnimationFrame(step); }
+          else { animId = null; }
+        }
+        if(animId) cancelAnimationFrame(animId);
+        animId = requestAnimationFrame(step);
+      }
+
+      // initial placement
+      window.addEventListener('load', ()=>{ reset(); });
+      startBtn.addEventListener('click', ()=>{ animate(5000); });
+      resetBtn.addEventListener('click', reset);
+
+      // make layout reactive on resize
+      window.addEventListener('resize', ()=>{ placeAt(0); });
+
+    })();
+  </script>
+</body>
+</html>
