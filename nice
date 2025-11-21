@@ -1,9 +1,14 @@
 
 #!/usr/bin/env python3
 """
-voice-typist: شنیدن میکروفون و تایپ متن تشخیص‌داده‌شده در پنجره‌ی فعال.
-استفاده: اجرای این اسکریپت و سپس فشار دادن Ctrl+Shift+S برای شروع/توقف گوش دادن.
-توجه امنیتی: فقط روی دستگاهی که اجازه استفاده از آن را دارید اجرا کنید.
+voice-typist: Listen to microphone input and type recognized text
+into the currently active window.
+
+Usage:
+    Run the script, then press Ctrl+Shift+S to start/stop listening.
+
+Security Note:
+    Use this only on devices you own or have permission to access.
 """
 
 import time
@@ -14,11 +19,12 @@ import speech_recognition as sr
 import pyautogui
 from pynput import keyboard
 
-# تنظیمات
+# Settings
 HOTKEY_START_STOP = {keyboard.Key.ctrl_l, keyboard.Key.shift, keyboard.KeyCode(char='s')}
-LANG = "fa-IR"  # زبان مورد نظر برای تشخیص گفتار (فارسی). می‌توانید "en-US" یا دیگران را بگذارید.
-PAUSE_BETWEEN_TYPING = 0.01  # فاصله‌ی بین کاراکترها هنگام تایپ (ثانیه)
-USE_GOOGLE = True  # اگر False بخواهد روش‌های آفلاین دیگر استفاده شود، باید تغییر دهید.
+LANG = "en-US"  # Set language for speech recognition
+PAUSE_BETWEEN_TYPING = 0.01  # Delay between each typed character
+USE_GOOGLE = True  # If False, script will attempt offline recognition (PocketSphinx)
+
 
 class VoiceTypist:
     def __init__(self, lang=LANG):
@@ -29,69 +35,62 @@ class VoiceTypist:
 
     def start_listening(self):
         if self.listening:
-            print("در حال حاضر در حالت گوش دادن هستیم.")
+            print("Already listening.")
             return
         self.listening = True
         self._stop_flag.clear()
         t = threading.Thread(target=self._listen_loop, daemon=True)
         t.start()
-        print("شروع گوش دادن. برای توقف دوباره کلیدهای راه‌انداز را فشار دهید یا Ctrl+C.")
+        print("Listening started. Press the hotkey again to stop or use Ctrl+C.")
 
     def stop_listening(self):
         if not self.listening:
-            print("الان در حالت گوش دادن نیستیم.")
+            print("Not currently listening.")
             return
         self._stop_flag.set()
         self.listening = False
-        print("گوش دادن متوقف شد.")
+        print("Listening stopped.")
 
     def _listen_loop(self):
         mic = sr.Microphone()
         with mic as source:
-            # کالیبراسیون محیطی (اختیاری، بهتر است در محیط ساکت انجام شود)
-            print("کالیبره کردن نویز محیط — لطفاً چند ثانیه سکوت کنید...")
+            print("Calibrating microphone... please remain silent for a moment.")
             self.recognizer.adjust_for_ambient_noise(source, duration=1.5)
-            print("کالیبراسیون تمام شد.")
+            print("Calibration done.")
             while not self._stop_flag.is_set():
                 try:
-                    print("گوش دادن...")
+                    print("Listening...")
                     audio = self.recognizer.listen(source, timeout=5, phrase_time_limit=8)
                 except sr.WaitTimeoutError:
-                    # اگر هیچ ورودی صوتی نیامد، حلقه را ادامه می‌دهیم
                     continue
 
-                # تبدیل گفتار به متن
+                # Speech to text
                 text = None
                 try:
                     if USE_GOOGLE:
-                        # از Google Web Speech API استفاده می‌کنیم (نیاز به اینترنت)
                         text = self.recognizer.recognize_google(audio, language=self.lang)
                     else:
-                        # می توانید اینجا مدل آفلاین یا pocketsphinx قرار دهید
                         text = self.recognizer.recognize_sphinx(audio, language=self.lang)
                 except sr.UnknownValueError:
-                    print("قابل تشخیص نیست.")
+                    print("Couldn't understand audio.")
                     continue
                 except sr.RequestError as e:
-                    print("خطای سرویس تشخیص گفتار:", e)
-                    print("مطمئن شوید اتصال اینترنت دارید یا USE_GOOGLE=False را بگذارید.")
+                    print("Speech recognition service error:", e)
                     continue
 
                 if text:
-                    print("تشخیص داده شد:", text)
+                    print("Recognized:", text)
                     self._type_text(text)
+
                 time.sleep(0.2)
 
     def _type_text(self, text):
-        # تایپ متن در پنجره/input فعلی
         try:
-            # اگر می‌خواهید Enter بفرستید در انتها: pyautogui.press("enter")
             pyautogui.write(text, interval=PAUSE_BETWEEN_TYPING)
         except Exception as e:
-            print("خطا هنگام تایپ خودکار:", e)
+            print("Typing error:", e)
 
 
-# مدیریت هات‌کی برای شروع/توقف
 class HotkeyController:
     def __init__(self, voice_typist):
         self.voice_typist = voice_typist
@@ -99,12 +98,13 @@ class HotkeyController:
 
     def on_press(self, key):
         try:
-            if key in HOTKEY_START_STOP or (isinstance(key, keyboard.KeyCode) and key.char and 's' == key.char):
+            if key in HOTKEY_START_STOP or (
+                isinstance(key, keyboard.KeyCode) and key.char == 's'
+            ):
                 self.current_keys.add(key)
         except Exception:
             pass
 
-        # بررسی اینکه همه کلیدهای مورد نیاز فشرده شده‌اند
         if all(k in self.current_keys for k in HOTKEY_START_STOP):
             # toggle
             if self.voice_typist.listening:
@@ -120,14 +120,19 @@ class HotkeyController:
 def main():
     vt = VoiceTypist()
     controller = HotkeyController(vt)
-    listener = keyboard.Listener(on_press=controller.on_press, on_release=controller.on_release)
+    listener = keyboard.Listener(
+        on_press=controller.on_press,
+        on_release=controller.on_release
+    )
     listener.start()
-    print("Voice-typist آماده است. از کلید Ctrl+Shift+S برای شروع/توقف استفاده کنید.")
+
+    print("Voice-typist is running. Press Ctrl+Shift+S to start/stop listening.")
+
     try:
         while True:
             time.sleep(0.5)
     except KeyboardInterrupt:
-        print("\nخروج... متوقف کردن.")
+        print("\nExiting...")
         vt.stop_listening()
         listener.stop()
         sys.exit(0)
