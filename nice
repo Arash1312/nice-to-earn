@@ -1,183 +1,137 @@
-<!--
-Project: Bring the Samovar to the Islamic Republic (Demo)
-Language: English (README + single-file web demo)
 
-How to use:
-1. Save this file as index.html in a new GitHub repository (or place it in the repo root).
-2. Commit & push to GitHub. To publish, enable GitHub Pages from repository Settings and set the source to the main branch (root). The page will be available at https://<your-username>.github.io/<repo-name>/
+#!/usr/bin/env python3
+"""
+voice-typist: شنیدن میکروفون و تایپ متن تشخیص‌داده‌شده در پنجره‌ی فعال.
+استفاده: اجرای این اسکریپت و سپس فشار دادن Ctrl+Shift+S برای شروع/توقف گوش دادن.
+توجه امنیتی: فقط روی دستگاهی که اجازه استفاده از آن را دارید اجرا کنید.
+"""
 
-What this repo contains:
-- A tiny, single-file demo that shows a playful animated samovar traveling across the screen toward a labeled location "Islamic Republic (IR)". It's a non-political, light-hearted visualization suitable for demos, teaching, or embedding in docs.
+import time
+import threading
+import sys
 
-License: MIT
--->
+import speech_recognition as sr
+import pyautogui
+from pynput import keyboard
 
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Bring the Samovar — Demo</title>
-  <style>
-    :root{--bg:#f6f8fb;--card:#ffffff;--accent:#2b6cb0}
-    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
-    body{display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,var(--bg),#e9eef6)}
-    .container{width:920px;max-width:96%;background:var(--card);border-radius:12px;box-shadow:0 8px 30px rgba(15,23,42,0.12);padding:24px}
-    header{display:flex;align-items:center;gap:16px}
-    h1{margin:0;font-size:20px}
-    p.lead{margin:6px 0 18px;color:#415165}
+# تنظیمات
+HOTKEY_START_STOP = {keyboard.Key.ctrl_l, keyboard.Key.shift, keyboard.KeyCode(char='s')}
+LANG = "fa-IR"  # زبان مورد نظر برای تشخیص گفتار (فارسی). می‌توانید "en-US" یا دیگران را بگذارید.
+PAUSE_BETWEEN_TYPING = 0.01  # فاصله‌ی بین کاراکترها هنگام تایپ (ثانیه)
+USE_GOOGLE = True  # اگر False بخواهد روش‌های آفلاین دیگر استفاده شود، باید تغییر دهید.
 
-    .stage{position:relative;height:360px;border-radius:8px;background:linear-gradient(180deg,#fff,#f3f7ff);overflow:hidden;padding:20px;border:1px dashed rgba(66,90,150,0.06)}
+class VoiceTypist:
+    def __init__(self, lang=LANG):
+        self.recognizer = sr.Recognizer()
+        self.lang = lang
+        self.listening = False
+        self._stop_flag = threading.Event()
 
-    /* destination marker */
-    .destination{position:absolute;right:70px;top:50%;transform:translateY(-50%);text-align:center}
-    .pin{display:inline-block;font-size:48px;line-height:1}
-    .dest-label{font-weight:600;color:#1f2937;margin-top:6px}
-    .dest-sub{font-size:12px;color:#6b7280}
+    def start_listening(self):
+        if self.listening:
+            print("در حال حاضر در حالت گوش دادن هستیم.")
+            return
+        self.listening = True
+        self._stop_flag.clear()
+        t = threading.Thread(target=self._listen_loop, daemon=True)
+        t.start()
+        print("شروع گوش دادن. برای توقف دوباره کلیدهای راه‌انداز را فشار دهید یا Ctrl+C.")
 
-    /* samovar (SVG container) */
-    .samovar{position:absolute;left:20px;bottom:40px;width:140px;height:160px;transform-origin:center center}
+    def stop_listening(self):
+        if not self.listening:
+            print("الان در حالت گوش دادن نیستیم.")
+            return
+        self._stop_flag.set()
+        self.listening = False
+        print("گوش دادن متوقف شد.")
 
-    /* path visual (dashed) */
-    .path{position:absolute;left:0;right:0;top:0;bottom:0;pointer-events:none}
-    .controls{display:flex;gap:8px;align-items:center;margin-top:18px}
-    button{background:var(--accent);color:white;border:0;padding:10px 14px;border-radius:8px;font-weight:600;cursor:pointer}
-    button.secondary{background:transparent;color:var(--accent);border:1px solid rgba(43,108,176,0.12)}
-    small.note{color:#6b7280;margin-left:auto}
+    def _listen_loop(self):
+        mic = sr.Microphone()
+        with mic as source:
+            # کالیبراسیون محیطی (اختیاری، بهتر است در محیط ساکت انجام شود)
+            print("کالیبره کردن نویز محیط — لطفاً چند ثانیه سکوت کنید...")
+            self.recognizer.adjust_for_ambient_noise(source, duration=1.5)
+            print("کالیبراسیون تمام شد.")
+            while not self._stop_flag.is_set():
+                try:
+                    print("گوش دادن...")
+                    audio = self.recognizer.listen(source, timeout=5, phrase_time_limit=8)
+                except sr.WaitTimeoutError:
+                    # اگر هیچ ورودی صوتی نیامد، حلقه را ادامه می‌دهیم
+                    continue
 
-    /* simple progress */
-    .progress{height:8px;background:rgba(15,23,42,0.06);border-radius:999px;margin-top:12px;overflow:hidden}
-    .progress > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),#5aa0e6)}
+                # تبدیل گفتار به متن
+                text = None
+                try:
+                    if USE_GOOGLE:
+                        # از Google Web Speech API استفاده می‌کنیم (نیاز به اینترنت)
+                        text = self.recognizer.recognize_google(audio, language=self.lang)
+                    else:
+                        # می توانید اینجا مدل آفلاین یا pocketsphinx قرار دهید
+                        text = self.recognizer.recognize_sphinx(audio, language=self.lang)
+                except sr.UnknownValueError:
+                    print("قابل تشخیص نیست.")
+                    continue
+                except sr.RequestError as e:
+                    print("خطای سرویس تشخیص گفتار:", e)
+                    print("مطمئن شوید اتصال اینترنت دارید یا USE_GOOGLE=False را بگذارید.")
+                    continue
 
-    /* keyframes */
-    @keyframes floaty {0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
-    .samovar svg{animation:floaty 2.8s infinite ease-in-out}
+                if text:
+                    print("تشخیص داده شد:", text)
+                    self._type_text(text)
+                time.sleep(0.2)
 
-  </style>
-</head>
-<body>
-  <div class="container">
-    <header>
-      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='36' height='36'><rect rx='8' width='36' height='36' fill='%232b6cb0'/><text x='50%' y='58%' font-size='18' font-family='Arial' fill='white' text-anchor='middle' alignment-baseline='middle'>☕</text></svg>" alt="logo" width="36" height="36">
-      <div>
-        <h1>Bring the Samovar — Demo</h1>
-        <p class="lead">A tiny, English-language GitHub-friendly demo that animates a samovar moving toward a labeled destination called the <strong>Islamic Republic (IR)</strong>. Safe, playful visualization for docs or demos.</p>
-      </div>
-    </header>
+    def _type_text(self, text):
+        # تایپ متن در پنجره/input فعلی
+        try:
+            # اگر می‌خواهید Enter بفرستید در انتها: pyautogui.press("enter")
+            pyautogui.write(text, interval=PAUSE_BETWEEN_TYPING)
+        except Exception as e:
+            print("خطا هنگام تایپ خودکار:", e)
 
-    <div class="stage" id="stage">
-      <!-- destination -->
-      <div class="destination" aria-hidden="true">
-        <div class="pin">📍</div>
-        <div class="dest-label">Islamic Republic (IR)</div>
-        <div class="dest-sub">Demo destination</div>
-      </div>
 
-      <!-- dashed curved path (pure CSS/SVG) -->
-      <svg class="path" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true">
-        <defs>
-          <linearGradient id="g1" x1="0%" x2="100%"><stop offset="0%" stop-opacity="0.9" stop-color="#2b6cb0"/><stop offset="100%" stop-opacity="0.4" stop-color="#5aa0e6"/></linearGradient>
-        </defs>
-        <path id="p" d="M 90 290 C 260 230, 520 160, 820 200" fill="none" stroke="url(#g1)" stroke-width="3" stroke-dasharray="8 8" stroke-linecap="round"/>
-      </svg>
+# مدیریت هات‌کی برای شروع/توقف
+class HotkeyController:
+    def __init__(self, voice_typist):
+        self.voice_typist = voice_typist
+        self.current_keys = set()
 
-      <!-- samovar (simple SVG) -->
-      <div class="samovar" id="samovar" role="img" aria-label="samovar">
-        <svg viewBox="0 0 128 160" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <!-- body -->
-          <g transform="translate(0,0)">
-            <ellipse cx="64" cy="88" rx="44" ry="32" fill="#f6e9d8" stroke="#b58b57" stroke-width="2"/>
-            <rect x="20" y="32" width="88" height="96" rx="18" fill="#fbe9c9" stroke="#b58b57" stroke-width="2"/>
-            <rect x="36" y="18" width="56" height="28" rx="10" fill="#fbe9c9" stroke="#b58b57" stroke-width="2"/>
-            <circle cx="64" cy="40" r="6" fill="#b58b57"/>
-            <!-- spout -->
-            <path d="M 108 74 Q 118 80, 108 92" stroke="#b58b57" stroke-width="4" fill="none" stroke-linecap="round"/>
-            <!-- handle -->
-            <path d="M 20 70 Q 10 88, 20 106" stroke="#b58b57" stroke-width="6" fill="none" stroke-linecap="round"/>
-            <!-- feet -->
-            <rect x="42" y="120" width="12" height="6" rx="3" fill="#b58b57"/>
-            <rect x="74" y="120" width="12" height="6" rx="3" fill="#b58b57"/>
-          </g>
-        </svg>
-      </div>
+    def on_press(self, key):
+        try:
+            if key in HOTKEY_START_STOP or (isinstance(key, keyboard.KeyCode) and key.char and 's' == key.char):
+                self.current_keys.add(key)
+        except Exception:
+            pass
 
-    </div>
+        # بررسی اینکه همه کلیدهای مورد نیاز فشرده شده‌اند
+        if all(k in self.current_keys for k in HOTKEY_START_STOP):
+            # toggle
+            if self.voice_typist.listening:
+                self.voice_typist.stop_listening()
+            else:
+                self.voice_typist.start_listening()
 
-    <div class="controls">
-      <button id="startBtn">Send Samovar</button>
-      <button id="resetBtn" class="secondary">Reset</button>
-      <small class="note">This is a demo for GitHub — copy to a repo and publish with GitHub Pages.</small>
-    </div>
+    def on_release(self, key):
+        if key in self.current_keys:
+            self.current_keys.remove(key)
 
-    <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
 
-    <footer style="margin-top:14px;font-size:13px;color:#5b6b78">
-      <strong>License:</strong> MIT — feel free to fork and adapt. 
-    </footer>
-  </div>
+def main():
+    vt = VoiceTypist()
+    controller = HotkeyController(vt)
+    listener = keyboard.Listener(on_press=controller.on_press, on_release=controller.on_release)
+    listener.start()
+    print("Voice-typist آماده است. از کلید Ctrl+Shift+S برای شروع/توقف استفاده کنید.")
+    try:
+        while True:
+            time.sleep(0.5)
+    except KeyboardInterrupt:
+        print("\nخروج... متوقف کردن.")
+        vt.stop_listening()
+        listener.stop()
+        sys.exit(0)
 
-  <script>
-    // Simple animation: follow the SVG path and update progress
-    (function(){
-      const samovar = document.getElementById('samovar');
-      const startBtn = document.getElementById('startBtn');
-      const resetBtn = document.getElementById('resetBtn');
-      const progressBar = document.getElementById('progressBar');
-      const path = document.querySelector('#p');
-      const pathLength = path.getTotalLength();
-      let animId = null;
 
-      // place samovar at the start of the path
-      function placeAt(t){
-        // t in [0,1]
-        const pt = path.getPointAtLength(pathLength * t);
-        // convert SVG coordinates to stage pixel coords
-        const stage = document.getElementById('stage');
-        const bbox = stage.getBoundingClientRect();
-        // path viewBox is 0..1000 x 0..400; map to bbox
-        const x = bbox.left + (pt.x / 1000) * bbox.width;
-        const y = bbox.top + (pt.y / 400) * bbox.height;
-        // set samovar center near the point
-        const sW = samovar.offsetWidth, sH = samovar.offsetHeight;
-        samovar.style.left = Math.max(6, (pt.x / 1000) * bbox.width - sW/6) + 'px';
-        samovar.style.top = Math.min(bbox.height - sH - 12, (pt.y / 400) * bbox.height + 24) + 'px';
-      }
-
-      // Reset to start
-      function reset(){
-        cancelAnimationFrame(animId);
-        progressBar.style.width = '0%';
-        progressBar.style.transform = 'translateX(0)';
-        progressBar.style.transition = 'none';
-        samovar.style.transition = 'transform 0.12s linear';
-        placeAt(0);
-      }
-
-      // Animate from 0 -> 1 over duration ms
-      function animate(duration=4000){
-        const start = performance.now();
-        function step(now){
-          const elapsed = now - start;
-          const t = Math.min(1, elapsed / duration);
-          placeAt(t);
-          progressBar.style.width = (t*100) + '%';
-          progressBar.style.transition = 'width 120ms linear';
-          if(t < 1){ animId = requestAnimationFrame(step); }
-          else { animId = null; }
-        }
-        if(animId) cancelAnimationFrame(animId);
-        animId = requestAnimationFrame(step);
-      }
-
-      // initial placement
-      window.addEventListener('load', ()=>{ reset(); });
-      startBtn.addEventListener('click', ()=>{ animate(5000); });
-      resetBtn.addEventListener('click', reset);
-
-      // make layout reactive on resize
-      window.addEventListener('resize', ()=>{ placeAt(0); });
-
-    })();
-  </script>
-</body>
-</html>
+if __name__ == "__main__":
+    main()
