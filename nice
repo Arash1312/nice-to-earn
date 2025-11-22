@@ -1,142 +1,23 @@
-
-#!/usr/bin/env python3
-"""
-voice-typist: Listen to microphone input and type recognized text
-into the currently active window.
-
-Usage:
-    Run the script, then press Ctrl+Shift+S to start/stop listening.
-
-Security Note:
-    Use this only on devices you own or have permission to access.
-"""
-
-import time
-import threading
-import sys
-
-import speech_recognition as sr
-import pyautogui
-from pynput import keyboard
-
-# Settings
-HOTKEY_START_STOP = {keyboard.Key.ctrl_l, keyboard.Key.shift, keyboard.KeyCode(char='s')}
-LANG = "en-US"  # Set language for speech recognition
-PAUSE_BETWEEN_TYPING = 0.01  # Delay between each typed character
-USE_GOOGLE = True  # If False, script will attempt offline recognition (PocketSphinx)
-
-
-class VoiceTypist:
-    def __init__(self, lang=LANG):
-        self.recognizer = sr.Recognizer()
-        self.lang = lang
-        self.listening = False
-        self._stop_flag = threading.Event()
-
-    def start_listening(self):
-        if self.listening:
-            print("Already listening.")
-            return
-        self.listening = True
-        self._stop_flag.clear()
-        t = threading.Thread(target=self._listen_loop, daemon=True)
-        t.start()
-        print("Listening started. Press the hotkey again to stop or use Ctrl+C.")
-
-    def stop_listening(self):
-        if not self.listening:
-            print("Not currently listening.")
-            return
-        self._stop_flag.set()
-        self.listening = False
-        print("Listening stopped.")
-
-    def _listen_loop(self):
-        mic = sr.Microphone()
-        with mic as source:
-            print("Calibrating microphone... please remain silent for a moment.")
-            self.recognizer.adjust_for_ambient_noise(source, duration=1.5)
-            print("Calibration done.")
-            while not self._stop_flag.is_set():
-                try:
-                    print("Listening...")
-                    audio = self.recognizer.listen(source, timeout=5, phrase_time_limit=8)
-                except sr.WaitTimeoutError:
-                    continue
-
-                # Speech to text
-                text = None
-                try:
-                    if USE_GOOGLE:
-                        text = self.recognizer.recognize_google(audio, language=self.lang)
-                    else:
-                        text = self.recognizer.recognize_sphinx(audio, language=self.lang)
-                except sr.UnknownValueError:
-                    print("Couldn't understand audio.")
-                    continue
-                except sr.RequestError as e:
-                    print("Speech recognition service error:", e)
-                    continue
-
-                if text:
-                    print("Recognized:", text)
-                    self._type_text(text)
-
-                time.sleep(0.2)
-
-    def _type_text(self, text):
-        try:
-            pyautogui.write(text, interval=PAUSE_BETWEEN_TYPING)
-        except Exception as e:
-            print("Typing error:", e)
-
-
-class HotkeyController:
-    def __init__(self, voice_typist):
-        self.voice_typist = voice_typist
-        self.current_keys = set()
-
-    def on_press(self, key):
-        try:
-            if key in HOTKEY_START_STOP or (
-                isinstance(key, keyboard.KeyCode) and key.char == 's'
-            ):
-                self.current_keys.add(key)
-        except Exception:
-            pass
-
-        if all(k in self.current_keys for k in HOTKEY_START_STOP):
-            # toggle
-            if self.voice_typist.listening:
-                self.voice_typist.stop_listening()
-            else:
-                self.voice_typist.start_listening()
-
-    def on_release(self, key):
-        if key in self.current_keys:
-            self.current_keys.remove(key)
-
-
-def main():
-    vt = VoiceTypist()
-    controller = HotkeyController(vt)
-    listener = keyboard.Listener(
-        on_press=controller.on_press,
-        on_release=controller.on_release
-    )
-    listener.start()
-
-    print("Voice-typist is running. Press Ctrl+Shift+S to start/stop listening.")
-
-    try:
-        while True:
-            time.sleep(0.5)
-    except KeyboardInterrupt:
-        print("\nExiting...")
-        vt.stop_listening()
-        listener.stop()
-        sys.exit(0)
-
-
-if __name__ == "__main__":
-    main()
+skin-type-classifier/
+├─ README.md
+├─ LICENSE
+├─ requirements.txt
+├─ .gitignore
+├─ dataset/
+│   ├─ train/
+│   │   ├─ dry/
+│   │   ├─ normal/
+│   │   ├─ oily/
+│   │   └─ combination/
+│   └─ val/
+│       ├─ dry/
+│       ├─ normal/
+│       ├─ oily/
+│       └─ combination/
+├─ src/
+│   ├─ train.py
+│   ├─ predict.py
+│   ├─ app.py
+│   └─ utils.py
+└─ models/
+    └─ best_model.h5
