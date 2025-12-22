@@ -1,3 +1,10 @@
+│   ├─ train/
+│   │   ├─ dry/
+│   │   ├─ normal/
+│   │   ├─ oily/
+│   │   └─ combination/
+│   └─ val/
+│       ├─ dry/
 │       ├─ normal/
 │       ├─ oily/
 │       └─ combination/
@@ -14,10 +21,3 @@ skin-type-classifier/
 ├─ requirements.txt
 ├─ .gitignore
 ├─ dataset/
-│   ├─ train/
-│   │   ├─ dry/
-│   │   ├─ normal/
-│   │   ├─ oily/
-│   │   └─ combination/
-│   └─ val/
-│       ├─ dry/
