@@ -1,4 +1,6 @@
-├─ README.md
+├─ README.md best_model.h5
+skin-type-classifier/
+
 ├─ LICENSE
 ├─ requirements.txt
 ├─ .gitignore
@@ -18,6 +20,4 @@
 │   ├─ app.py
 │   └─ utils.py
 └─ models/
-    └─ best_model.h5
-skin-type-classifier/
-
+    └─
