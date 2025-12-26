@@ -1,4 +1,8 @@
-│   ├─ train/
+├─ README.md
+├─ LICENSE
+├─ requirements.txt
+├─ .gitignore
+├─ dataset/│   ├─ train/
 │   │   ├─ dry/
 │   │   ├─ normal/
 │   │   ├─ oily/
@@ -16,8 +20,4 @@
 └─ models/
     └─ best_model.h5
 skin-type-classifier/
-├─ README.md
-├─ LICENSE
-├─ requirements.txt
-├─ .gitignore
-├─ dataset/
+
