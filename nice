@@ -1,23 +1,72 @@
-├─ README.md best_model.h5
-skin-type-classifier/
+Repository Health Report
+------------------------
+✓ README.md found
+✗ LICENSE missing
+✓ .gitignore found
+⚠ .env file detected (potential security risk)
+✓ requirements.txt found
 
-├─ LICENSE
-├─ requirements.txt
-├─ .gitignore
-├─ dataset/│   ├─ train/
-│   │   ├─ dry/
-│   │   ├─ normal/
-│   │   ├─ oily/
-│   │   └─ combination/
-│   └─ val/
-│       ├─ dry/
-│       ├─ normal/
-│       ├─ oily/
-│       └─ combination/
-├─ src/
-│   ├─ train.py
-│   ├─ predict.py
-│   ├─ app.py
-│   └─ utils.py
-└─ models/
-    └─
+Overall Score: 3 / 5
+#!/usr/bin/env python3
+import os
+from pathlib import Path
+
+ESSENTIAL_FILES = [
+    "README.md",
+    "LICENSE",
+    ".gitignore"
+]
+
+DEPENDENCY_FILES = [
+    "requirements.txt",
+    "pyproject.toml",
+    "package.json"
+]
+
+def check_files(base_path, files):
+    results = {}
+    for file in files:
+        results[file] = (base_path / file).exists()
+    return results
+
+def scan_for_env_files(base_path):
+    return list(base_path.rglob(".env"))
+
+def print_report(essential, dependencies, env_files):
+    print("\nRepository Health Report")
+    print("-" * 24)
+
+    score = 0
+    total = len(essential) + 1  # +1 for dependency check
+
+    for file, exists in essential.items():
+        if exists:
+            print(f"✓ {file} found")
+            score += 1
+        else:
+            print(f"✗ {file} missing")
+
+    if any(dependencies.values()):
+        print("✓ Dependency file found")
+        score += 1
+    else:
+        print("✗ No dependency file found")
+
+    if env_files:
+        print("⚠ .env file detected (potential security risk)")
+    else:
+        print("✓ No .env files detected")
+
+    print(f"\nOverall Score: {score} / {total}")
+
+def main():
+    repo_path = Path(os.getcwd())
+
+    essential_results = check_files(repo_path, ESSENTIAL_FILES)
+    dependency_results = check_files(repo_path, DEPENDENCY_FILES)
+    env_files = scan_for_env_files(repo_path)
+
+    print_report(essential_results, dependency_results, env_files)
+
+if __name__ == "__main__":
+    main()
