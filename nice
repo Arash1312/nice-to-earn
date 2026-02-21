@@ -6,10 +6,6 @@ Repository Health Report
 ⚠ .env file detected (potential security risk)
 ✓ requirements.txt found
 
-Overall Score: 3 / 5
-#!/usr/bin/env python3
-import os
-from pathlib import Path
 
 ESSENTIAL_FILES = [
     "README.md",
@@ -51,6 +47,10 @@ def print_report(essential, dependencies, env_files):
         score += 1
     else:
         print("✗ No dependency file found")
+Overall Score: 3 / 5
+#!/usr/bin/env python3
+import os
+from pathlib import Path
 
     if env_files:
         print("⚠ .env file detected (potential security risk)")
