@@ -13,6 +13,10 @@ ESSENTIAL_FILES = [
     ".gitignore"
 ]
 
+ESSENTIAL_FILES = [
+    "README.md",
+    "LICENSE",
+    ".gitignore"
 DEPENDENCY_FILES = [
     "requirements.txt",
     "pyproject.toml",
