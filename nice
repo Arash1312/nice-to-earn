@@ -56,13 +56,6 @@ Overall Score: 3 / 5
 import os
 from pathlib import Path
 
-    if env_files:
-        print("⚠ .env file detected (potential security risk)")
-    else:
-        print("✓ No .env files detected")
-
-    print(f"\nOverall Score: {score} / {total}")
-
 def main():
     repo_path = Path(os.getcwd())
 
@@ -71,6 +64,13 @@ def main():
     env_files = scan_for_env_files(repo_path)
 
     print_report(essential_results, dependency_results, env_files)
+
+    if env_files:
+        print("⚠ .env file detected (potential security risk)")
+    else:
+        print("✓ No .env files detected")
+
+    print(f"\nOverall Score: {score} / {total}")
 
 if __name__ == "__main__":
     main()
